@@ -1,110 +1,108 @@
 <?php
 require('../model/database.php');
-require('../model/product_db.php');
-require('../model/category_db.php');
+require('../model/player_db.php');
+require('../model/team_db.php');
 
 $action = filter_input(INPUT_POST, 'action');
 if ($action == NULL) {
     $action = filter_input(INPUT_GET, 'action');
     if ($action == NULL) {
-        $action = 'list_products';
+        $action = 'list_players';
     }
 }
 
-if ($action == 'list_products') {
-    // Get the current category ID
-    $category_id = filter_input(INPUT_GET, 'category_id', 
+if ($action == 'list_players') {
+    // Get the current team ID
+    $team_ID = filter_input(INPUT_GET, 'team_ID', 
             FILTER_VALIDATE_INT);
-    if ($category_id == NULL || $category_id == FALSE) {
-        $category_id = 1;
+    if ($team_ID == NULL || $team_ID == FALSE) {
+        $team_ID = 1;
     }
     
-    // Get product and category data
-    $category_name = get_category_name($category_id);
-    $categories = get_categories();
-    $products = get_products_by_category($category_id);
+    // Get player and team data
+    $team_name = get_team_name($team_ID);
+    $teams = get_teams();
+    $players = get_players_by_team($team_ID);
 
-    // Display the product list
-    include('product_list.php');
+    // Display the player list
+    include('player_list.php');
 } else if ($action == 'show_edit_form') {
-    $product_id = filter_input(INPUT_POST, 'product_id', 
+    $player_id = filter_input(INPUT_POST, 'player_id', 
             FILTER_VALIDATE_INT);
-    if ($product_id == NULL || $product_id == FALSE) {
-        $error = "Missing or incorrect product id.";
+    if ($player_id == NULL || $player_id == FALSE) {
+        $error = "Missing or incorrect player id.";
         include('../errors/error.php');
     } else { 
-        $product = get_product($product_id);
-        include('product_edit.php');
+        $player = get_player($player_id);
+        include('player_edit.php');
     }
-} else if ($action == 'update_product') {
-    $product_id = filter_input(INPUT_POST, 'product_id', 
+} else if ($action == 'update_player') {
+    $player_id = filter_input(INPUT_POST, 'player_id', 
             FILTER_VALIDATE_INT);
-    $category_id = filter_input(INPUT_POST, 'category_id', 
+    $team_ID = filter_input(INPUT_POST, 'team_ID', 
             FILTER_VALIDATE_INT);
-    $code = filter_input(INPUT_POST, 'code');
-    $name = filter_input(INPUT_POST, 'name');
-    $price = filter_input(INPUT_POST, 'price', FILTER_VALIDATE_FLOAT);
+    $player_name = filter_input(INPUT_POST, 'player_name');
+    $position = filter_input(INPUT_POST, 'position');
 
     // Validate the inputs
-    if ($product_id == NULL || $product_id == FALSE || $category_id == NULL || 
-            $category_id == FALSE || $code == NULL || $name == NULL || 
-            $price == NULL || $price == FALSE) {
-        $error = "Invalid product data. Check all fields and try again.";
+    if ($player_id == NULL || $player_id == FALSE || $team_ID == NULL || 
+            $team_ID == FALSE || $player_name == NULL || $position == NULL){
+        $error = "Invalid player data. Check all fields and try again.";
         include('../errors/error.php');
     } else {
-        update_product($product_id, $category_id, $code, $name, $price);
+        update_player($player_id, $team_ID, $player_name, $position, $price);
 
-        // Display the Product List page for the current category
-        header("Location: .?category_id=$category_id");
+        // Display the player List page for the current team
+        header("Location: .?team_ID=$team_ID");
     }
-} else if ($action == 'delete_product') {
-    $product_id = filter_input(INPUT_POST, 'product_id', 
+} else if ($action == 'delete_player') {
+    $player_id = filter_input(INPUT_POST, 'player_id', 
             FILTER_VALIDATE_INT);
-    $category_id = filter_input(INPUT_POST, 'category_id', 
+    $team_ID = filter_input(INPUT_POST, 'team_ID', 
             FILTER_VALIDATE_INT);
-    if ($category_id == NULL || $category_id == FALSE ||
-            $product_id == NULL || $product_id == FALSE) {
-        $error = "Missing or incorrect product id or category id.";
+    if ($team_ID == NULL || $team_ID == FALSE ||
+            $player_id == NULL || $player_id == FALSE) {
+        $error = "Missing or incorrect player id or team id.";
         include('../errors/error.php');
     } else { 
-        delete_product($product_id);
-        header("Location: .?category_id=$category_id");
+        delete_player($player_id);
+        header("Location: .?team_ID=$team_ID");
     }
 } else if ($action == 'show_add_form') {
-    $categories = get_categories();
-    include('product_add.php');
-} else if ($action == 'add_product') {
-    $category_id = filter_input(INPUT_POST, 'category_id', 
+    $teams = get_teams();
+    include('player_add.php');
+} else if ($action == 'add_player') {
+    $team_ID = filter_input(INPUT_POST, 'team_ID', 
             FILTER_VALIDATE_INT);
-    $code = filter_input(INPUT_POST, 'code');
-    $name = filter_input(INPUT_POST, 'name');
+    $player_name = filter_input(INPUT_POST, 'player_name');
+    $position = filter_input(INPUT_POST, 'position');
     $price = filter_input(INPUT_POST, 'price', FILTER_VALIDATE_FLOAT);
-    if ($category_id == NULL || $category_id == FALSE || $code == NULL || 
-            $name == NULL || $price == NULL || $price == FALSE) {
-        $error = "Invalid product data. Check all fields and try again.";
+    if ($team_ID == NULL || $team_ID == FALSE || $player_name == NULL || 
+            $position == NULL) {
+        $error = "Invalid player data. Check all fields and try again.";
         include('../errors/error.php');
     } else { 
-        add_product($category_id, $code, $name, $price);
-        header("Location: .?category_id=$category_id");
+        add_player($team_ID, $player_name, $position, $price);
+        header("Location: .?team_ID=$team_ID");
     }
-} else if ($action == 'list_categories') {
-    $categories = get_categories();
-    include('category_list.php');
-} else if ($action == 'add_category') {
-    $name = filter_input(INPUT_POST, 'name');
+} else if ($action == 'list_teams') {
+    $teams = get_teams();
+    include('team_list.php');
+} else if ($action == 'add_team') {
+    $position = filter_input(INPUT_POST, 'position');
 
     // Validate inputs
     if ($name == NULL) {
-        $error = "Invalid category name. Check name and try again.";
+        $error = "Invalid team name. Check name and try again.";
         include('../errors/error.php');
     } else {
-        add_category($name);
-        header('Location: .?action=list_categories');  // display the Category List page
+        add_team($name);
+        header('Location: .?action=list_teams');  // display the team List page
     }
-} else if ($action == 'delete_category') {
-    $category_id = filter_input(INPUT_POST, 'category_id', 
+} else if ($action == 'delete_team') {
+    $team_ID = filter_input(INPUT_POST, 'team_ID', 
             FILTER_VALIDATE_INT);
-    delete_category($category_id);
-    header('Location: .?action=list_categories');      // display the Category List page
+    delete_team($team_ID);
+    header('Location: .?action=list_teams');      // display the team List page
 }
 ?>
