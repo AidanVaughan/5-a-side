@@ -1,35 +1,33 @@
 <?php include '../view/header.php'; ?>
 <main>
-    <h1>Add player</h1>
+    <h1>Add Player</h1>
     <form action="index.php" method="post" id="add_player_form">
         <input type="hidden" name="action" value="add_player">
 
-        <label>team:</label>
-        <select name="team_ID">
+        <label>Category:</label>
+        <select name="team_id">
         <?php foreach ( $teams as $team ) : ?>
-            <option value="<?php echo $team['team_ID']; ?>">
+            <option value="<?php echo $team['teamID']; ?>">
                 <?php echo $team['teamName']; ?>
             </option>
         <?php endforeach; ?>
         </select>
         <br>
 
-        <label>player_name:</label>
-        <input type="input" name="Player Name">
+        <label>Position:</label>
+        <input type="input" name="position">
         <br>
 
         <label>Name:</label>
-        <input type="input" name="Position">
+        <input type="input" name="name">
         <br>
 
-        
-
         <label>&nbsp;</label>
-        <input type="submit" value="Add player">
+        <input type="submit" value="Add Player">
         <br>
     </form>
     <p class="last_paragraph">
-        <a href="index.php?action=list_players">View player List</a>
+        <a href="index.php?action=list_players">View Player List</a>
     </p>
 
 </main>

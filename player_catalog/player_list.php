@@ -2,8 +2,8 @@
 <main>
     <aside>
         <!-- display a list of teams -->
-        <h2>teams</h2>
-        <?php include '../view/team_nav.php'; ?>        
+        <h2>Categories</h2>
+        <?php include '../view/category_nav.php'; ?>        
     </aside>
     <section>
         <h1><?php echo $team_name; ?></h1>
@@ -12,8 +12,8 @@
             <?php foreach ($players as $player) : ?>
             <li>
                 <a href="?action=view_player&amp;player_id=<?php 
-                          echo $player['player_id']; ?>">
-                    <?php echo $player['position']; ?>
+                          echo $player['playerID']; ?>">
+                    <?php echo $player['playerName']; ?>
                 </a>
             </li>
             <?php endforeach; ?>

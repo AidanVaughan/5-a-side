@@ -2,18 +2,18 @@
 function get_teams() {
     global $db;
     $query = 'SELECT * FROM teams
-              ORDER BY team_ID';
+              ORDER BY teamID';
     $statement = $db->prepare($query);
     $statement->execute();
     return $statement; 
 }
 
-function get_team_name($team_ID) {
+function get_team_name($team_id) {
     global $db;
     $query = 'SELECT * FROM teams
-              WHERE team_ID = :team_ID';    
+              WHERE teamID = :team_id';    
     $statement = $db->prepare($query);
-    $statement->bindValue(':team_ID', $team_ID);
+    $statement->bindValue(':team_id', $team_id);
     $statement->execute();    
     $team = $statement->fetch();
     $statement->closeCursor();    
@@ -31,12 +31,12 @@ function add_team($name) {
     $statement->closeCursor();    
 }
 
-function delete_team($team_ID) {
+function delete_team($team_id) {
     global $db;
     $query = 'DELETE FROM teams
-              WHERE team_ID = :team_ID';
+              WHERE teamID = :team_id';
     $statement = $db->prepare($query);
-    $statement->bindValue(':team_ID', $team_ID);
+    $statement->bindValue(':team_id', $team_id);
     $statement->execute();
     $statement->closeCursor();
 }

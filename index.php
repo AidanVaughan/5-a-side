@@ -4,10 +4,10 @@
     <h1>Menu</h1>
     <ul>
         <li>
-            <a href="player_manager">player Manager</a>
+            <a href="player_manager">Player Manager</a>
         </li>
         <li>
-            <a href="teams">player Catalog</a>
+            <a href="player_catalog">Player Catalog</a>
         </li>
     </ul>
 </main>

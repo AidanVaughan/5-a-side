@@ -13,16 +13,16 @@ if ($action == NULL) {
 
 if ($action == 'list_players') {
     // Get the current team ID
-    $team_ID = filter_input(INPUT_GET, 'team_ID', 
+    $team_id = filter_input(INPUT_GET, 'team_id', 
             FILTER_VALIDATE_INT);
-    if ($team_ID == NULL || $team_ID == FALSE) {
-        $team_ID = 1;
+    if ($team_id == NULL || $team_id == FALSE) {
+        $team_id = 1;
     }
     
     // Get player and team data
-    $team_name = get_team_name($team_ID);
+    $team_name = get_team_name($team_id);
     $teams = get_teams();
-    $players = get_players_by_team($team_ID);
+    $players = get_players_by_team($team_id);
 
     // Display the player list
     include('player_list.php');
@@ -39,57 +39,57 @@ if ($action == 'list_players') {
 } else if ($action == 'update_player') {
     $player_id = filter_input(INPUT_POST, 'player_id', 
             FILTER_VALIDATE_INT);
-    $team_ID = filter_input(INPUT_POST, 'team_ID', 
+    $team_id = filter_input(INPUT_POST, 'team_id', 
             FILTER_VALIDATE_INT);
-    $player_name = filter_input(INPUT_POST, 'player_name');
     $position = filter_input(INPUT_POST, 'position');
+    $name = filter_input(INPUT_POST, 'name');
+   
 
     // Validate the inputs
-    if ($player_id == NULL || $player_id == FALSE || $team_ID == NULL || 
-            $team_ID == FALSE || $player_name == NULL || $position == NULL){
+    if ($player_id == NULL || $player_id == FALSE || $team_id == NULL || 
+            $team_id == FALSE || $position == NULL || $name == NULL) {
         $error = "Invalid player data. Check all fields and try again.";
         include('../errors/error.php');
     } else {
-        update_player($player_id, $team_ID, $player_name, $position, $price);
+        update_player($player_id, $team_id, $position, $name);
 
-        // Display the player List page for the current team
-        header("Location: .?team_ID=$team_ID");
+        // Display the Product List page for the current team
+        header("Location: .?team_id=$team_id");
     }
 } else if ($action == 'delete_player') {
     $player_id = filter_input(INPUT_POST, 'player_id', 
             FILTER_VALIDATE_INT);
-    $team_ID = filter_input(INPUT_POST, 'team_ID', 
+    $team_id = filter_input(INPUT_POST, 'team_id', 
             FILTER_VALIDATE_INT);
-    if ($team_ID == NULL || $team_ID == FALSE ||
+    if ($team_id == NULL || $team_id == FALSE ||
             $player_id == NULL || $player_id == FALSE) {
         $error = "Missing or incorrect player id or team id.";
         include('../errors/error.php');
     } else { 
         delete_player($player_id);
-        header("Location: .?team_ID=$team_ID");
+        header("Location: .?team_id=$team_id");
     }
 } else if ($action == 'show_add_form') {
     $teams = get_teams();
     include('player_add.php');
 } else if ($action == 'add_player') {
-    $team_ID = filter_input(INPUT_POST, 'team_ID', 
+    $team_id = filter_input(INPUT_POST, 'team_id', 
             FILTER_VALIDATE_INT);
-    $player_name = filter_input(INPUT_POST, 'player_name');
     $position = filter_input(INPUT_POST, 'position');
-    $price = filter_input(INPUT_POST, 'price', FILTER_VALIDATE_FLOAT);
-    if ($team_ID == NULL || $team_ID == FALSE || $player_name == NULL || 
-            $position == NULL) {
+    $name = filter_input(INPUT_POST, 'name');
+    if ($team_id == NULL || $team_id == FALSE || $position == NULL || 
+            $name == NULL) {
         $error = "Invalid player data. Check all fields and try again.";
         include('../errors/error.php');
     } else { 
-        add_player($team_ID, $player_name, $position, $price);
-        header("Location: .?team_ID=$team_ID");
+        add_player($team_id, $position, $name);
+        header("Location: .?team_id=$team_id");
     }
 } else if ($action == 'list_teams') {
     $teams = get_teams();
     include('team_list.php');
 } else if ($action == 'add_team') {
-    $position = filter_input(INPUT_POST, 'position');
+    $name = filter_input(INPUT_POST, 'name');
 
     // Validate inputs
     if ($name == NULL) {
@@ -97,12 +97,12 @@ if ($action == 'list_players') {
         include('../errors/error.php');
     } else {
         add_team($name);
-        header('Location: .?action=list_teams');  // display the team List page
+        header('Location: .?action=list_teams');  // display the Category List page
     }
 } else if ($action == 'delete_team') {
-    $team_ID = filter_input(INPUT_POST, 'team_ID', 
+    $team_id = filter_input(INPUT_POST, 'team_id', 
             FILTER_VALIDATE_INT);
-    delete_team($team_ID);
-    header('Location: .?action=list_teams');      // display the team List page
+    delete_team($team_id);
+    header('Location: .?action=list_teams');      // display the Category List page
 }
 ?>

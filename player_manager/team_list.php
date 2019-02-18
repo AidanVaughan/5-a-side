@@ -1,7 +1,7 @@
 <?php include '../view/header.php'; ?>
 <main>
 
-    <h1>team List</h1>
+    <h1>Team List</h1>
     <table>
         <tr>
             <th>Name</th>
@@ -14,8 +14,8 @@
                 <form id="delete_player_form"
                       action="index.php" method="post">
                     <input type="hidden" name="action" value="delete_team">
-                    <input type="hidden" name="team_ID"
-                           value="<?php echo $team['team_ID']; ?>">
+                    <input type="hidden" name="team_id"
+                           value="<?php echo $team['teamID']; ?>">
                     <input type="submit" value="Delete">
                 </form>
             </td>
@@ -24,7 +24,7 @@
     </table>
     <br />
 
-    <h2>Add team</h2>
+    <h2>Add Team</h2>
     <form id="add_team_form"
           action="index.php" method="post">
         <input type="hidden" name="action" value="add_team">
@@ -34,7 +34,7 @@
         <input type="submit" value="Add">
     </form>
 
-    <p><a href="index.php?action=list_players">List players</a></p>
+    <p><a href="index.php?action=list_players">List Products</a></p>
 
 </main>
 <?php include '../view/footer.php'; ?>

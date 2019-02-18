@@ -1,26 +1,26 @@
 <?php include '../view/header.php'; ?>
 <main>
-    <h1>Edit player</h1>
+    <h1>Edit Product</h1>
     <form action="index.php" method="post" id="add_player_form">
 
         <input type="hidden" name="action" value="update_player">
 
         <input type="hidden" name="player_id"
-               value="<?php echo $player['player_id']; ?>">
+               value="<?php echo $player['playerID']; ?>">
 
-        <label>team ID:</label>
-        <input type="team_ID" name="team_ID"
-               value="<?php echo $player['team_ID']; ?>">
+        <label>Team ID:</label>
+        <input type="team_id" name="team_id"
+               value="<?php echo $player['teamID']; ?>">
         <br>
 
-        <label>player_name:</label>
-        <input type="input" name="player_name"
-               value="<?php echo $player['player_name']; ?>">
+        <label>Position:</label>
+        <input type="input" name="code"
+               value="<?php echo $player['playerPosition']; ?>">
         <br>
 
         <label>Name:</label>
         <input type="input" name="name"
-               value="<?php echo $player['position']; ?>">
+               value="<?php echo $player['playerName']; ?>">
         <br>
 
         
@@ -29,7 +29,7 @@
         <input type="submit" value="Save Changes">
         <br>
     </form>
-    <p><a href="index.php?action=list_players">View player List</a></p>
+    <p><a href="index.php?action=list_players">View Player List</a></p>
 
 </main>
 <?php include '../view/footer.php'; ?>
