@@ -30,7 +30,7 @@ if ($action == 'list_players') {
     $player_id = filter_input(INPUT_POST, 'player_id', 
             FILTER_VALIDATE_INT);
     if ($player_id == NULL || $player_id == FALSE) {
-        $error = "Missing or incorrect player id.";
+        $error = "Missing or incorrect player id. This player could not be found";
         include('../errors/error.php');
     } else { 
         $player = get_player($player_id);
@@ -53,7 +53,7 @@ if ($action == 'list_players') {
     } else {
         update_player($player_id, $team_id, $position, $name);
 
-        // Display the Product List page for the current team
+        // Display the Player List page for the current team
         header("Location: .?team_id=$team_id");
     }
 } else if ($action == 'delete_player') {

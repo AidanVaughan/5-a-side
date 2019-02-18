@@ -14,7 +14,7 @@
         <br>
 
         <label>Position:</label>
-        <input type="input" name="code"
+        <input type="input" name="Position"
                value="<?php echo $player['playerPosition']; ?>">
         <br>
 
