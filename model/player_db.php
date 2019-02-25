@@ -74,4 +74,14 @@ function update_player($player_id, $team_id, $position, $name) {
     $statement->execute();
     $statement->closeCursor();
 }
+
+function delete_playerForTeam($team_id) {
+    global $db;
+    $query = 'DELETE FROM players
+              WHERE teamID = :team_id';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':team_id', $team_id);
+    $statement->execute();
+    $statement->closeCursor();
+}
 ?>
