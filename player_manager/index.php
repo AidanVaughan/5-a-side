@@ -41,7 +41,7 @@ if ($action == 'list_players') {
             FILTER_VALIDATE_INT);
     $team_id = filter_input(INPUT_POST, 'team_id', 
             FILTER_VALIDATE_INT);
-    $position = filter_input(INPUT_POST, 'position');
+    $position = filter_input(INPUT_POST, 'Position');
     $name = filter_input(INPUT_POST, 'name');
    
 

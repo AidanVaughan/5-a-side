@@ -64,7 +64,7 @@ function update_player($player_id, $team_id, $position, $name) {
     $query = 'UPDATE players
               SET teamID = :team_id,
                   playerposition = :position,
-                  playerName = :name,
+                  playerName = :name
                WHERE playerID = :player_id';
     $statement = $db->prepare($query);
     $statement->bindValue(':team_id', $team_id);
