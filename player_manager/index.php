@@ -106,5 +106,12 @@ if ($action == 'list_players') {
     delete_team($team_id);
     header('Location: .?action=list_teams');      // display the Category List page
     
+    
+}else if($action == 'clearTeam'){
+    $team_id = filter_input(INPUT_POST, 'team_id', 
+            FILTER_VALIDATE_INT);
+    delete_playerForTeam($team_id);
+    header('Location: .?action=list_teams');
 }
+
 ?>

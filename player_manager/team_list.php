@@ -5,7 +5,8 @@
     <table>
         <tr>
             <th>Name</th>
-            <th>&nbsp;</th>
+            <th>Delete</th>
+            <th>Remove Players</th>
         </tr>
         <?php foreach ($teams as $team) : ?>
         <tr>
@@ -17,6 +18,15 @@
                     <input type="hidden" name="team_id"
                            value="<?php echo $team['teamID']; ?>">
                     <input type="submit" value="Delete">
+                    
+                </form>
+            </td>
+            <td>
+                <form id="clearTeam" action="index.php" method="post">
+                <input type="hidden" name="action" value="clearTeam">
+                  <input type="hidden" name="team_id"
+                           value="<?php echo $team['teamID']; ?>">
+                 <input type="submit" value="Clear Team">
                 </form>
             </td>
         </tr>
