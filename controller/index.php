@@ -64,14 +64,16 @@ if ($action == 'list_players') {
         // Display the Player List page for the current team
         header("Location: .?team_id=$team_id");
     }
-} else if ($action == 'delete_player') {
+} else if ($action == 'delete_p1ayer') {
     $player_id = filter_input(INPUT_POST, 'player_id', 
             FILTER_VALIDATE_INT);
     $team_id = filter_input(INPUT_POST, 'team_id', 
             FILTER_VALIDATE_INT);
-    if ($team_id == NULL || $team_id == FALSE ||
-            $player_id == NULL || $player_id == FALSE) {
-        $error = "Missing or incorrect player id or team id.";
+    if ($player_id == NULL || $player_id == FALSE) {
+        $error = "Missing or incorrect player id";
+        include('../errors/error.php');
+    }else if($team_id == NULL || $team_id == FALSE){
+        $error = "Invalid player data. Check team field and try again. ";
         include('../errors/error.php');
     } else { 
         delete_player($player_id);
