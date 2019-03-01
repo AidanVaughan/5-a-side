@@ -46,11 +46,19 @@ if ($action == 'list_players') {
    
 
     // Validate the inputs
-    if ($player_id == NULL || $player_id == FALSE || $team_id == NULL || 
-            $team_id == FALSE || $position == NULL || $name == NULL) {
-        $error = "Invalid player data. Check all fields and try again.";
+    if ($player_id == NULL || $player_id == FALSE) {
+        $error = "Invalid player data. Check player id field and try again.";
         include('../errors/error.php');
-    } else {
+    }else if($team_id == NULL || $team_id == FALSE){
+        $error = "Invalid player data. Check team field and try again. ";
+        include('../errors/error.php');
+    }else if($position == NULL){
+        $error = "Invalid player data. Check position field and try again.";
+        include('../errors/error.php');
+    }else if($name == NULL){
+        $error = "Invalid player data. Check Name field and try again.";
+        include('../errors/error.php');
+    }else {
         update_player($player_id, $team_id, $position, $name);
 
         // Display the Player List page for the current team
