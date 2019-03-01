@@ -7,9 +7,9 @@ This application offers a user friendly interface. A selection of currently acti
 It is also easy for the user to see a list of the current teams by hitting the list teams functionality, from here they can add new teams, delete old teams or even clear a team of all its players.
 
 ## Features
--Lists all players on a team
--Add players to the system
--Remove or edit any player currently on a team
--Lists all teams on the system
--Add or remove teams from the system
--Quick options to remove all players from a team
+* Lists all players on a team
+* Add players to the system
+* Remove or edit any player currently on a team
+* Lists all teams on the system
+* Add or remove teams from the system
+* Quick options to remove all players from a team
