@@ -1,5 +1,5 @@
 <?php
-    $dsn = 'mysql:host=localhost;dbname=5-a-side';
+    $dsn = 'mysql:host=localhost;dbname=wp_ca3_vaughan_aidan';
     $username = 'root';
     $password = '';
 
