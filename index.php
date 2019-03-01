@@ -6,7 +6,7 @@
     <h3>Useful Site Links</h3>
     <ul>
         <li>
-            <a href="player_manager">Player Manager</a>
+            <a href="controller">Player Manager</a>
         </li>
     </ul>
 </main>
